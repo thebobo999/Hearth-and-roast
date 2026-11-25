@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hearth &amp; Roast | Artisanal Coffee &amp; Bakery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --espresso: #2c1e16;
+      --terracotta: #b85d3b;
+      --terracotta-hover: #9d4c2e;
+      --latte: #f8f3ed;
+      --cream: #fffcf8;
+      --muted-brown: #6d5b50;
+      --border-warm: #e6dcd1;
+    }
+
+    [data-bs-theme="dark"] {
+      --latte: #1b1410;
+      --cream: #241b16;
+      --muted-brown: #c2b2a7;
+      --border-warm: #3a2c24;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--espresso);
+      scroll-behavior: smooth;
+    }
+
+    [data-bs-theme="dark"] body {
+      color: #f4ece6;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .navbar {
+      background-color: rgba(255, 252, 248, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-warm);
+    }
+
+    [data-bs-theme="dark"] .navbar {
+      background-color: rgba(27, 20, 16, 0.92);
+    }
+
+    .btn-terracotta {
+      background-color: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn-terracotta:hover {
+      background-color: var(--terracotta-hover);
+      border-color: var(--terracotta-hover);
+      color: #fff;
+    }
+
+    .btn-outline-terracotta {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+
+    .btn-outline-terracotta:hover,
+    .btn-outline-terracotta.active {
+      background-color: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #fff;
+    }
+
+    .hero-section {
+      background: linear-gradient(rgba(30, 19, 13, 0.65), rgba(30, 19, 13, 0.72)),
+                  url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      min-height: 82vh;
+      color: #fffcf8;
+    }
+
+    .section-latte {
+      background-color: var(--latte);
+    }
+
+    .card-warm {
+      background-color: var(--cream);
+      border: 1px solid var(--border-warm);
+      border-radius: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-warm:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(44, 30, 22, 0.08);
+    }
+
+    .menu-img {
+      height: 190px;
+      object-fit: cover;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    .badge-diet {
+      background-color: var(--latte);
+      color: var(--terracotta);
+      border: 1px solid var(--border-warm);
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .today-row {
+      background-color: rgba(184, 93, 59, 0.14) !important;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand brand-font fs-3 fw-bold d-flex align-items-center gap-2" href="#">
+        <i class="bi bi-cup-hot-fill" style="color: var(--terracotta);"></i>
+        <span>Hearth &amp; Roast</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3 fw-medium">
+          <li class="nav-item"><a class="nav-link" href="#story">Our Story</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#brew-guide">Brew Guide &amp; Quiz</a></li>
+          <li class="nav-item"><a class="nav-link" href="#visit">Visit &amp; Hours</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <button id="themeToggle" class="btn btn-outline-secondary btn-sm rounded-pill px-3" title="Toggle theme">
+            <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+          </button>
+          <button class="btn btn-outline-terracotta btn-sm rounded-pill px-3 position-relative" data-bs-toggle="offcanvas" data-bs-target="#orderDrawer">
+            <i class="bi bi-bag-heart me-1"></i> Order Preview
+            <span id="orderCountBadge" class="badge rounded-pill bg-danger ms-1">0</span>
+          </button>
+          <a href="#visit" class="btn btn-terracotta btn-sm rounded-pill px-3">Reserve a Table</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section d-flex align-items-center">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(255,255,255,0.14); backdrop-filter: blur(6px);">
+            <span id="heroStatusDot" class="status-dot bg-success"></span>
+            <small id="heroStatusText" class="fw-semibold">Checking live cafe hours...</small>
+          </div>
+          <h1 class="display-3 fw-bold mb-3">Small-Batch Roasts &amp; Warm Morning Rituals.</h1>
+          <p class="lead mb-4 opacity-90">
+            Ethically sourced single-origin beans roasted in-house every Tuesday and Friday, paired with laminated sourdough pastries baked at dawn.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#menu" class="btn btn-terracotta btn-lg rounded-pill px-4">Explore the Menu</a>
+            <a href="#brew-guide" class="btn btn-outline-light btn-lg rounded-pill px-4">Find Your Roast</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Story & Craft -->
+  <section id="story" class="py-5">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80"
+               alt="Barista pouring latte art" class="img-fluid rounded-4 shadow" />
+        </div>
+        <div class="col-lg-6">
+          <span class="text-uppercase fw-bold small" style="color: var(--terracotta); letter-spacing: 1.5px;">Our Philosophy</span>
+          <h2 class="display-5 fw-bold mt-2 mb-3">From Highland Farms to Your Morning Cup</h2>
+          <p class="mb-4" style="color: var(--muted-brown);">
+            Founded in 2018, Hearth &amp; Roast partners directly with family-owned micro-lots in Ethiopia, Colombia, and Guatemala. We roast on a vintage cast-iron drum roaster to highlight natural stone-fruit, cacao, and floral notes without bitterness.
+          </p>
+          <div class="row g-3">
+            <div class="col-sm-4">
+              <div class="p-3 rounded-3 card-warm text-center">
+                <i class="bi bi-globe-americas fs-3 mb-2" style="color: var(--terracotta);"></i>
+                <h6 class="fw-bold mb-1">100% Direct Trade</h6>
+                <small style="color: var(--muted-brown);">Transparent farm pricing</small>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="p-3 rounded-3 card-warm text-center">
+                <i class="bi bi-fire fs-3 mb-2" style="color: var(--terracotta);"></i>
+                <h6 class="fw-bold mb-1">Roasted Weekly</h6>
+                <small style="color: var(--muted-brown);">Peak freshness guaranteed</small>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="p-3 rounded-3 card-warm text-center">
+                <i class="bi bi-flower1 fs-3 mb-2" style="color: var(--terracotta);"></i>
+                <h6 class="fw-bold mb-1">House Pastries</h6>
+                <small style="color: var(--muted-brown);">Organic local flour &amp; butter</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu & Customizer -->
+  <section id="menu" class="section-latte py-5">
+    <div class="container py-4">
+      <div class="text-center max-w-2xl mx-auto mb-4">
+        <span class="text-uppercase fw-bold small" style="color: var(--terracotta); letter-spacing: 1.5px;">Seasonal Offerings</span>
+        <h2 class="display-5 fw-bold mt-1">Crafted Drinks &amp; Bakery</h2>
+        <p style="color: var(--muted-brown);">Filter by category or dietary preference, or build your custom drink below.</p>
+      </div>
+
+      <!-- Category & Dietary Controls -->
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-3" id="categoryFilters">
+        <button class="btn btn-outline-terracotta rounded-pill active" data-category="all">All Items</button>
+        <button class="btn btn-outline-terracotta rounded-pill" data-category="espresso">Espresso &amp; Hot</button>
+        <button class="btn btn-outline-terracotta rounded-pill" data-category="cold">Cold Brew &amp; Iced</button>
+        <button class="btn btn-outline-terracotta rounded-pill" data-category="pastry">Artisanal Pastries</button>
+        <button class="btn btn-outline-terracotta rounded-pill" data-category="beans">Whole Bean Roasts</button>
+      </div>
+
+      <div class="d-flex justify-content-center gap-4 mb-4">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="filterVegan" />
+          <label class="form-check-label fw-medium" for="filterVegan">Vegan Only</label>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="filterGF" />
+          <label class="form-check-label fw-medium" for="filterGF">Gluten-Free Only</label>
+        </div>
+      </div>
+
+      <!-- Menu Cards Grid -->
+      <div class="row g-4 mb-5" id="menuGrid"></div>
+
+      <!-- Custom Drink Price Estimator -->
+      <div class="card-warm p-4 p-md-5 shadow-sm">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-4">
+            <span class="badge rounded-pill mb-2" style="background-color: var(--terracotta);">Interactive Estimator</span>
+            <h3 class="fw-bold">Build Your Custom Cup</h3>
+            <p class="mb-0 small" style="color: var(--muted-brown);">
+              Customize your size, milk alternative, and house-made syrup to see live pricing and add it to your pickup preview.
+            </p>
+          </div>
+          <div class="col-lg-8">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label small fw-bold">Base Drink</label>
+                <select id="customBase" class="form-select">
+                  <option value="Latte|4.75">Signature Latte ($4.75)</option>
+                  <option value="Cold Brew|4.50">Kyoto Cold Brew ($4.50)</option>
+                  <option value="Matcha Latte|5.25">Ceremonial Matcha ($5.25)</option>
+                  <option value="Americano|3.75">Double Americano ($3.75)</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small fw-bold">Size</label>
+                <select id="customSize" class="form-select">
+                  <option value="8 oz|0">8 oz (+$0.00)</option>
+                  <option value="12 oz|0.65" selected>12 oz (+$0.65)</option>
+                  <option value="16 oz|1.25">16 oz (+$1.25)</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small fw-bold">Milk Option</label>
+                <select id="customMilk" class="form-select">
+                  <option value="Whole Milk|0">Whole Milk ($0.00)</option>
+                  <option value="Oat Milk|0.75">Barista Oat (+$0.75)</option>
+                  <option value="Almond Milk|0.75">Almond (+$0.75)</option>
+                  <option value="No Milk|0">Black / No Milk ($0.00)</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label small fw-bold">House Syrup</label>
+                <select id="customSyrup" class="form-select">
+                  <option value="None|0">None</option>
+                  <option value="Vanilla Bean|0.60">Vanilla (+$0.60)</option>
+                  <option value="Cardamom Honey|0.75">Cardamom (+$0.75)</option>
+                  <option value="Brown Sugar|0.60">Brown Sugar (+$0.60)</option>
+                </select>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-between align-items-center mt-4 pt-3 border-top">
+              <div>
+                <span class="small text-uppercase fw-bold" style="color: var(--muted-brown);">Estimated Total:</span>
+                <span id="customPriceDisplay" class="fs-3 fw-bold ms-2" style="color: var(--terracotta);">$5.40</span>
+              </div>
+              <button id="addCustomDrinkBtn" class="btn btn-terracotta rounded-pill px-4">
+                <i class="bi bi-plus-circle me-1"></i> Add Custom Drink to Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Brew Guide & Coffee Finder Quiz -->
+  <section id="brew-guide" class="py-5">
+    <div class="container py-4">
+      <div class="row g-5">
+        <!-- Brew Guide -->
+        <div class="col-lg-6">
+          <span class="text-uppercase fw-bold small" style="color: var(--terracotta); letter-spacing: 1.5px;">Home Barista Lab</span>
+          <h2 class="fw-bold mt-1 mb-3">Brewing Method Guide</h2>
+          <div class="btn-group w-100 mb-4" role="group" id="brewMethodButtons">
+            <button type="button" class="btn btn-outline-terracotta active" data-method="pourover">Pour Over</button>
+            <button type="button" class="btn btn-outline-terracotta" data-method="frenchpress">French Press</button>
+            <button type="button" class="btn btn-outline-terracotta" data-method="espresso">Espresso</button>
+            <button type="button" class="btn btn-outline-terracotta" data-method="coldbrew">Cold Brew</button>
+          </div>
+          <div class="card-warm p-4" id="brewGuideContent"></div>
+        </div>
+
+        <!-- Roast Finder Quiz -->
+        <div class="col-lg-6">
+          <span class="text-uppercase fw-bold small" style="color: var(--terracotta); letter-spacing: 1.5px;">Flavor Matcher</span>
+          <h2 class="fw-bold mt-1 mb-3">Find Your Ideal Roast</h2>
+          <div class="card-warm p-4">
+            <div class="mb-3">
+              <label class="form-label fw-bold">1. Which flavor profile sounds best?</label>
+              <select id="quizFlavor" class="form-select">
+                <option value="fruity">Bright, floral &amp; citrusy</option>
+                <option value="nutty">Smooth caramel, toasted hazelnut &amp; milk chocolate</option>
+                <option value="bold">Rich dark cocoa, spice &amp; smoky body</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">2. How do you usually take your coffee?</label>
+              <select id="quizMilk" class="form-select">
+                <option value="black">Black / Pour-over</option>
+                <option value="splash">With a splash of milk or oat milk</option>
+                <option value="latte">Creamy espresso drinks &amp; lattes</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">3. Preferred caffeine boost?</label>
+              <select id="quizCaffeine" class="form-select">
+                <option value="regular">Full single-origin energy</option>
+                <option value="decaf">Swiss Water Process Decaf</option>
+              </select>
+            </div>
+            <button id="runQuizBtn" class="btn btn-terracotta w-100 rounded-pill">Match My Beans</button>
+            <div id="quizResult" class="alert mt-3 mb-0 d-none" style="background-color: var(--latte); border-color: var(--terracotta);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit, Live Hours & Reservation Form -->
+  <section id="visit" class="section-latte py-5">
+    <div class="container py-4">
+      <div class="row g-5">
+        <div class="col-lg-5">
+          <span class="text-uppercase fw-bold small" style="color: var(--terracotta); letter-spacing: 1.5px;">Drop By</span>
+          <h2 class="fw-bold mt-1 mb-3">Hours &amp; Location</h2>
+          <p style="color: var(--muted-brown);">
+            <i class="bi bi-geo-alt-fill me-1" style="color: var(--terracotta);"></i>
+            742 Maplewood Ave, Arts District, Portland, OR 97205
+          </p>
+          <p style="color: var(--muted-brown);">
+            <i class="bi bi-telephone-fill me-1" style="color: var(--terracotta);"></i>
+            (503) 555-0194 &bull; hello@hearthandroast.example
+          </p>
+
+          <div class="card-warm p-3 mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="fw-bold mb-0">Weekly Schedule</h6>
+              <span id="tableStatusBadge" class="badge rounded-pill">Loading...</span>
+            </div>
+            <table class="table table-sm mb-0" id="hoursTable">
+              <tbody>
+                <tr data-day="1"><td>Monday</td><td class="text-end">6:30 AM – 6:00 PM</td></tr>
+                <tr data-day="2"><td>Tuesday</td><td class="text-end">6:30 AM – 6:00 PM</td></tr>
+                <tr data-day="3"><td>Wednesday</td><td class="text-end">6:30 AM – 6:00 PM</td></tr>
+                <tr data-day="4"><td>Thursday</td><td class="text-end">6:30 AM – 7:00 PM</td></tr>
+                <tr data-day="5"><td>Friday</td><td class="text-end">6:30 AM – 8:00 PM</td></tr>
+                <tr data-day="6"><td>Saturday</td><td class="text-end">7:30 AM – 8:00 PM</td></tr>
+                <tr data-day="0"><td>Sunday</td><td class="text-end">7:30 AM – 5:00 PM</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="card-warm p-4 p-md-5">
+            <h3 class="fw-bold mb-2">Reserve the Tasting Table or Send a Note</h3>
+            <p class="small mb-4" style="color: var(--muted-brown);">
+              Planning a quiet study session, private cupping flight, or pastry catering order? Let us know below.
+            </p>
+            <form id="reservationForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Your Name</label>
+                  <input type="text" class="form-control" id="guestName" required placeholder="Alex Rivera" />
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Email Address</label>
+                  <input type="email" class="form-control" id="guestEmail" required placeholder="alex@example.com" />
+                  <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Date &amp; Time</label>
+                  <input type="datetime-local" class="form-control" id="guestDate" required />
+                  <div class="invalid-feedback">Please select a date and time.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Party Size / Inquiry Type</label>
+                  <select class="form-select" id="guestParty">
+                    <option>2 Guests – Cozy Window Table</option>
+                    <option>4 Guests – Courtyard Patio</option>
+                    <option>6+ Guests – Weekend Coffee Flight</option>
+                    <option>Wholesale / Bakery Catering Inquiry</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Notes or Dietary Requests</label>
+                  <textarea class="form-control" id="guestNotes" rows="3" placeholder="Any allergies, oat milk preferences, or special occasion notes..."></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-terracotta rounded-pill px-4 py-2">Submit Request</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 border-top" style="border-color: var(--border-warm) !important;">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div class="brand-font fw-bold fs-5">
+        <i class="bi bi-cup-hot-fill me-1" style="color: var(--terracotta);"></i> Hearth &amp; Roast
+      </div>
+      <small style="color: var(--muted-brown);">&copy; 2026 Hearth &amp; Roast Coffee Co. Roasted with care.</small>
+      <div class="d-flex gap-3 fs-5">
+        <a href="#" class="text-reset"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-reset"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-reset"><i class="bi bi-tiktok"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Item Detail Modal -->
+  <div class="modal fade" id="itemDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: var(--cream);">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="modalItemTitle">Item Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalItemBody"></div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-terracotta rounded-pill" id="modalAddBtn">Add to Order Preview</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Preview Offcanvas Drawer -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="orderDrawer" style="background-color: var(--cream);">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold"><i class="bi bi-bag-heart me-2" style="color: var(--terracotta);"></i>Pickup Order Preview</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <div id="orderItemsList" class="flex-grow-1">
+        <p class="text-center my-5" style="color: var(--muted-brown);">Your order preview is empty. Add drinks or pastries from the menu!</p>
+      </div>
+      <div class="border-top pt-3">
+        <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+          <span>Estimated Total</span>
+          <span id="drawerTotal">$0.00</span>
+        </div>
+        <button id="clearOrderBtn" class="btn btn-outline-secondary w-100 rounded-pill mb-2">Clear List</button>
+        <button id="checkoutDemoBtn" class="btn btn-terracotta w-100 rounded-pill">Send Order to Barista</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast align-items-center text-bg-dark border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMessage">Added to your order preview!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 1. Menu Data
+    const menuItems = [
+      {
+        id: 1,
+        name: "Honey Cardamom Cortado",
+        category: "espresso",
+        price: 4.85,
+        vegan: false,
+        gf: true,
+        calories: "120 kcal",
+        notes: "Double ristretto, silky steamed milk, wildflower honey, freshly ground green cardamom.",
+        img: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 2,
+        name: "Oat Milk Brown Sugar Cortado",
+        category: "espresso",
+        price: 5.15,
+        vegan: true,
+        gf: true,
+        calories: "135 kcal",
+        notes: "Velvety barista oat milk, house muscovado syrup, cinnamon dust, Ethiopian espresso.",
+        img: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 3,
+        name: "Kyoto Slow-Drip Cold Brew",
+        category: "cold",
+        price: 4.95,
+        vegan: true,
+        gf: true,
+        calories: "10 kcal",
+        notes: "14-hour glass tower extraction with deep dark chocolate and black cherry notes.",
+        img: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 4,
+        name: "Iced Vanilla Bean Matcha",
+        category: "cold",
+        price: 5.65,
+        vegan: true,
+        gf: true,
+        calories: "160 kcal",
+        notes: "First-harvest Uji matcha whisked to order over oat milk and Madagascar vanilla.",
+        img: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 5,
+        name: "Brown Butter Almond Croissant",
+        category: "pastry",
+        price: 4.75,
+        vegan: false,
+        gf: false,
+        calories: "390 kcal",
+        notes: "72-hour fermented sourdough croissant filled with toasted almond frangipane.",
+        img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 6,
+        name: "Rosemary Olive Oil Loaf (GF)",
+        category: "pastry",
+        price: 4.25,
+        vegan: true,
+        gf: true,
+        calories: "280 kcal",
+        notes: "Almond flour cake baked with California extra-virgin olive oil, lemon zest, and sea salt.",
+        img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 7,
+        name: "Ethiopia Yirgacheffe (12oz Bag)",
+        category: "beans",
+        price: 19.50,
+        vegan: true,
+        gf: true,
+        calories: "Whole Bean",
+        notes: "Washed process • Light Roast • Tasting notes: Jasmine, bergamot, white peach.",
+        img: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 8,
+        name: "Hearth House Espresso Blend (12oz)",
+        category: "beans",
+        price: 18.00,
+        vegan: true,
+        gf: true,
+        calories: "Whole Bean",
+        notes: "Medium-Dark Roast • Tasting notes: Roasted hazelnut, dark cocoa, molasses.",
+        img: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=700&q=80"
+      }
+    ];
+
+    // 2. Render Menu & Filtering
+    let currentCategory = "all";
+    let orderCart = [];
+    let activeModalItem = null;
+
+    const menuGrid = document.getElementById("menuGrid");
+    const filterVegan = document.getElementById("filterVegan");
+    const filterGF = document.getElementById("filterGF");
+
+    function renderMenu() {
+      const veganOnly = filterVegan.checked;
+      const gfOnly = filterGF.checked;
+
+      const filtered = menuItems.filter(item => {
+        const catMatch = currentCategory === "all" || item.category === currentCategory;
+        const veganMatch = !veganOnly || item.vegan;
+        const gfMatch = !gfOnly || item.gf;
+        return catMatch && veganMatch && gfMatch;
+      });
+
+      if (filtered.length === 0) {
+        menuGrid.innerHTML = `<div class="col-12 text-center py-5"><p class="lead">No menu items match those exact filters. Try resetting a toggle!</p></div>`;
+        return;
+      }
+
+      menuGrid.innerHTML = filtered.map(item => `
+        <div class="col-md-6 col-lg-3">
+          <div class="card card-warm h-100">
+            <img src="${item.img}" class="menu-img" alt="${item.name}">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                <h5 class="card-title fw-bold mb-0">${item.name}</h5>
+                <span class="fw-bold" style="color: var(--terracotta);">$${item.price.toFixed(2)}</span>
+              </div>
+              <div class="mb-2 d-flex gap-1 flex-wrap">
+                ${item.vegan ? '<span class="badge badge-diet rounded-pill">Vegan</span>' : ''}
+                ${item.gf ? '<span class="badge badge-diet rounded-pill">Gluten-Free</span>' : ''}
+              </div>
+              <p class="card-text small flex-grow-1" style="color: var(--muted-brown);">${item.notes}</p>
+              <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill flex-grow-1" onclick="openItemModal(${item.id})">Details</button>
+                <button class="btn btn-sm btn-terracotta rounded-pill flex-grow-1" onclick="addToCart('${item.name.replace(/'/g, "\'")}', ${item.price})">
+                  <i class="bi bi-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    document.querySelectorAll("#categoryFilters button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#categoryFilters button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentCategory = btn.dataset.category;
+        renderMenu();
+      });
+    });
+
+    filterVegan.addEventListener("change", renderMenu);
+    filterGF.addEventListener("change", renderMenu);
+
+    // 3. Item Details Modal
+    const itemModal = new bootstrap.Modal(document.getElementById("itemDetailModal"));
+    function openItemModal(id) {
+      const item = menuItems.find(i => i.id === id);
+      if (!item) return;
+      activeModalItem = item;
+      document.getElementById("modalItemTitle").textContent = item.name;
+      document.getElementById("modalItemBody").innerHTML = `
+        <img src="${item.img}" class="img-fluid rounded-3 mb-3" alt="${item.name}">
+        <p>${item.notes}</p>
+        <ul class="list-unstyled small mb-0">
+          <li><strong>Price:</strong> $${item.price.toFixed(2)}</li>
+          <li><strong>Nutrition / Info:</strong> ${item.calories}</li>
+          <li><strong>Dietary:</strong> ${item.vegan ? "Plant-Based / Vegan" : "Contains Dairy/Eggs"} &bull; ${item.gf ? "Gluten-Free" : "Contains Wheat"}</li>
+        </ul>
+      `;
+      itemModal.show();
+    }
+
+    document.getElementById("modalAddBtn").addEventListener("click", () => {
+      if (activeModalItem) {
+        addToCart(activeModalItem.name, activeModalItem.price);
+        itemModal.hide();
+      }
+    });
+
+    // 4. Custom Drink Price Estimator
+    const customBase = document.getElementById("customBase");
+    const customSize = document.getElementById("customSize");
+    const customMilk = document.getElementById("customMilk");
+    const customSyrup = document.getElementById("customSyrup");
+    const customPriceDisplay = document.getElementById("customPriceDisplay");
+
+    function calculateCustomDrink() {
+      const basePrice = parseFloat(customBase.value.split("|")[1]);
+      const sizePrice = parseFloat(customSize.value.split("|")[1]);
+      const milkPrice = parseFloat(customMilk.value.split("|")[1]);
+      const syrupPrice = parseFloat(customSyrup.value.split("|")[1]);
+      const total = basePrice + sizePrice + milkPrice + syrupPrice;
+      customPriceDisplay.textContent = `$${total.toFixed(2)}`;
+      return total;
+    }
+
+    [customBase, customSize, customMilk, customSyrup].forEach(el => {
+      el.addEventListener("change", calculateCustomDrink);
+    });
+
+    document.getElementById("addCustomDrinkBtn").addEventListener("click", () => {
+      const baseName = customBase.value.split("|")[0];
+      const sizeName = customSize.value.split("|")[0];
+      const milkName = customMilk.value.split("|")[0];
+      const syrupName = customSyrup.value.split("|")[0];
+      const total = calculateCustomDrink();
+      const label = `Custom ${sizeName} ${baseName} (${milkName}${syrupName !== "None" ? ", " + syrupName : ""})`;
+      addToCart(label, total);
+    });
+
+    // 5. Order Cart Drawer & Toasts
+    const toastEl = new bootstrap.Toast(document.getElementById("liveToast"));
+    function showToast(msg) {
+      document.getElementById("toastMessage").textContent = msg;
+      toastEl.show();
+    }
+
+    function addToCart(name, price) {
+      orderCart.push({ name, price });
+      updateCartUI();
+      showToast(`Added "${name}" to your order preview.`);
+    }
+
+    function removeFromCart(index) {
+      orderCart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById("orderCountBadge").textContent = orderCart.length;
+      const list = document.getElementById("orderItemsList");
+      const totalEl = document.getElementById("drawerTotal");
+
+      if (orderCart.length === 0) {
+        list.innerHTML = `<p class="text-center my-5" style="color: var(--muted-brown);">Your order preview is empty. Add drinks or pastries from the menu!</p>`;
+        totalEl.textContent = "$0.00";
+        return;
+      }
+
+      let sum = 0;
+      list.innerHTML = orderCart.map((item, idx) => {
+        sum += item.price;
+        return `
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <div>
+              <div class="fw-semibold small">${item.name}</div>
+              <small style="color: var(--terracotta);">$${item.price.toFixed(2)}</small>
+            </div>
+            <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="removeFromCart(${idx})">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+        `;
+      }).join("");
+      totalEl.textContent = `$${sum.toFixed(2)}`;
+    }
+
+    document.getElementById("clearOrderBtn").addEventListener("click", () => {
+      orderCart = [];
+      updateCartUI();
+    });
+
+    document.getElementById("checkoutDemoBtn").addEventListener("click", () => {
+      if (orderCart.length === 0) {
+        showToast("Add at least one item before sending an order!");
+        return;
+      }
+      orderCart = [];
+      updateCartUI();
+      bootstrap.Offcanvas.getInstance(document.getElementById("orderDrawer")).hide();
+      showToast("Order received! Ready at the pickup bar in ~10 minutes.");
+    });
+
+    // 6. Brewing Method Guide
+    const brewGuides = {
+      pourover: {
+        title: "V60 Pour Over",
+        ratio: "1:16 (20g coffee to 320g water)",
+        temp: "202°F (94°C)",
+        grind: "Medium-Fine (like sea salt)",
+        steps: [
+          "Rinse paper filter with hot water and discard rinse water.",
+          "Add coffee grounds and pour 50g water for a 40-second bloom.",
+          "Pour remaining water in slow concentric circles until 2:30.",
+          "Swirl gently and let drawdown finish around 3:15."
+        ]
+      },
+      frenchpress: {
+        title: "Classic French Press",
+        ratio: "1:15 (30g coffee to 450g water)",
+        temp: "200°F (93°C)",
+        grind: "Coarse (like breadcrumbs)",
+        steps: [
+          "Add coarse grounds and saturate evenly with hot water.",
+          "Place lid on top without plunging and steep for 4 minutes.",
+          "Break the crust with a spoon and skim off foam.",
+          "Press plunger slowly and decant immediately."
+        ]
+      },
+      espresso: {
+        title: "Double Shot Espresso",
+        ratio: "1:2 (18g in to 36g liquid out)",
+        temp: "199°F (93°C)",
+        grind: "Fine (powdery with slight grit)",
+        steps: [
+          "Distribute grounds evenly in a preheated portafilter.",
+          "Tamp flat with firm, level pressure (~30 lbs).",
+          "Extract for 27–30 seconds aiming for warm honey viscosity."
+        ]
+      },
+      coldbrew: {
+        title: "Overnight Immersion Cold Brew",
+        ratio: "1:8 Concentrate (100g coffee to 800g water)",
+        temp: "Room Temp or Filtered Cold Water",
+        grind: "Extra Coarse",
+        steps: [
+          "Combine coffee and cold filtered water in a glass jar.",
+          "Stir thoroughly, cover, and steep 14–16 hours in the fridge.",
+          "Filter through a fine mesh sieve and dilute 1:1 with water or milk."
+        ]
+      }
+    };
+
+    function renderBrewGuide(methodKey) {
+      const g = brewGuides[methodKey];
+      document.getElementById("brewGuideContent").innerHTML = `
+        <h4 class="fw-bold mb-3">${g.title}</h4>
+        <div class="row g-2 mb-3 small">
+          <div class="col-4"><div class="p-2 rounded bg-body-secondary"><strong>Ratio:</strong><br>${g.ratio}</div></div>
+          <div class="col-4"><div class="p-2 rounded bg-body-secondary"><strong>Temp:</strong><br>${g.temp}</div></div>
+          <div class="col-4"><div class="p-2 rounded bg-body-secondary"><strong>Grind:</strong><br>${g.grind}</div></div>
+        </div>
+        <ol class="mb-0 ps-3">
+          ${g.steps.map(s => `<li class="mb-1">${s}</li>`).join("")}
+        </ol>
+      `;
+    }
+
+    document.querySelectorAll("#brewMethodButtons button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#brewMethodButtons button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderBrewGuide(btn.dataset.method);
+      });
+    });
+
+    // 7. Roast Finder Quiz
+    document.getElementById("runQuizBtn").addEventListener("click", () => {
+      const flavor = document.getElementById("quizFlavor").value;
+      const milk = document.getElementById("quizMilk").value;
+      const caff = document.getElementById("quizCaffeine").value;
+
+      let match = "";
+      if (caff === "decaf") {
+        match = "<strong>Colombia Huila Swiss Water Decaf:</strong> Naturally sweet notes of panela sugar, red apple, and toasted almond with zero caffeine.";
+      } else if (flavor === "fruity" && milk === "black") {
+        match = "<strong>Ethiopia Yirgacheffe Washed (Light Roast):</strong> Vibrant jasmine aroma with crisp bergamot and white peach clarity.";
+      } else if (flavor === "bold" || milk === "latte") {
+        match = "<strong>Hearth House Espresso Blend (Medium-Dark):</strong> Rich dark cocoa and roasted hazelnut notes crafted to shine through steamed milk.";
+      } else {
+        match = "<strong>Guatemala Antigua Bourbon (Medium Roast):</strong> Balanced caramel sweetness, mild citrus, and a velvety chocolate finish.";
+      }
+
+      const resBox = document.getElementById("quizResult");
+      resBox.innerHTML = `<i class="bi bi-stars me-1" style="color: var(--terracotta);"></i> Your Match: ${match}`;
+      resBox.classList.remove("d-none");
+    });
+
+    // 8. Live Open/Closed Status Checker
+    function checkCafeStatus() {
+      const now = new Date();
+      const day = now.getDay(); // 0 = Sun, 1 = Mon ... 6 = Sat
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      // Schedule in minutes from midnight
+      const schedule = {
+        0: [7 * 60 + 30, 17 * 60], // Sun 7:30 AM - 5:00 PM
+        1: [6 * 60 + 30, 18 * 60], // Mon 6:30 AM - 6:00 PM
+        2: [6 * 60 + 30, 18 * 60], // Tue
+        3: [6 * 60 + 30, 18 * 60], // Wed
+        4: [6 * 60 + 30, 19 * 60], // Thu 6:30 AM - 7:00 PM
+        5: [6 * 60 + 30, 20 * 60], // Fri 6:30 AM - 8:00 PM
+        6: [7 * 60 + 30, 20 * 60]  // Sat 7:30 AM - 8:00 PM
+      };
+
+      const [openMin, closeMin] = schedule[day];
+      const isOpen = currentMinutes >= openMin && currentMinutes < closeMin;
+
+      const dot = document.getElementById("heroStatusDot");
+      const heroText = document.getElementById("heroStatusText");
+      const badge = document.getElementById("tableStatusBadge");
+
+      if (isOpen) {
+        dot.className = "status-dot bg-success";
+        heroText.textContent = "Open Now • Fresh batch brewing at 742 Maplewood Ave";
+        badge.className = "badge rounded-pill bg-success";
+        badge.textContent = "Open Now";
+      } else {
+        dot.className = "status-dot bg-danger";
+        heroText.textContent = "Currently Closed • Opens at 6:30 AM Weekdays / 7:30 AM Weekends";
+        badge.className = "badge rounded-pill bg-secondary";
+        badge.textContent = "Closed";
+      }
+
+      document.querySelectorAll("#hoursTable tr").forEach(row => {
+        if (parseInt(row.dataset.day) === day) {
+          row.classList.add("today-row");
+        }
+      });
+    }
+
+    // 9. Form Validation
+    document.getElementById("reservationForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!this.checkValidity()) {
+        e.stopPropagation();
+        this.classList.add("was-validated");
+        return;
+      }
+      showToast("Reservation request sent! We will confirm via email shortly.");
+      this.reset();
+      this.classList.remove("was-validated");
+    });
+
+    // 10. Dark / Light Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    themeToggle.addEventListener("click", () => {
+      const html = document.documentElement;
+      const isDark = html.getAttribute("data-bs-theme") === "dark";
+      html.setAttribute("data-bs-theme", isDark ? "light" : "dark");
+      themeIcon.className = isDark ? "bi bi-moon-stars-fill" : "bi bi-sun-fill";
+    });
+
+    // Initialize Page
+    renderMenu();
+    renderBrewGuide("pourover");
+    checkCafeStatus();
+  </script>
+</body>
+</html>
